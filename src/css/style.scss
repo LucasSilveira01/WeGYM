@@ -1323,6 +1323,11 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    span {
+        float: right;
+        cursor: pointer;
+    }
 }
 
 .modal.open {
@@ -1339,6 +1344,33 @@ a {
     width: 100%;
     text-align: center;
     color: black;
+
+    input {
+        margin: 10px 0px;
+        border: none;
+        background-color: $background;
+        border-radius: 5px;
+        padding: 9px 9px;
+        color: #e9e9e9;
+    }
+
+    input:focus {
+        outline: none;
+        background-color: #fca2119f;
+        border: 3px solid $laranja inset;
+        transition: all .6s ease-in-out;
+    }
+
+    button {
+        background-color: $laranja;
+        padding: 10px 12px;
+        border: none;
+        border-radius: 5px;
+        width: 100%;
+        margin: 10px 0px;
+        font-weight: bold;
+        cursor: pointer;
+    }
 }
 
 /* Adicione qualquer outro estilo necessário para os elementos dentro da modal */
