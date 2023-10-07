@@ -154,8 +154,7 @@ function Calendar() {
                         <span className="close" onClick={() => setIsModalOpen(false)}>&times;</span>
                         <h2>Detalhes do Treino</h2>
                         <p>Data: {modalData.formattedDate}</p>
-                        <p>Dia: {modalData.day}</p>
-                        <label htmlFor="duration">Tempo de D    uração (minutos):</label>
+                        <label htmlFor="duration">Tempo de Duração (minutos):</label>
                         <input
                             type="text"
                             id="duration"
