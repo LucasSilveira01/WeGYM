@@ -1,0 +1,936 @@
+@charset "UTF-8";
+::-webkit-scrollbar {
+  background-color: #101010;
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.1843137255);
+  border-radius: 12px;
+  width: 2px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #14162E;
+  overflow: hidden;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+}
+.loading-container span {
+  font-size: 20px;
+  margin: 20px;
+  color: #e9e9e9;
+}
+.loading-container .loading-spinner {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 4px solid rgba(0, 251, 189, 0.5);
+  border-top: 4px solid #00FBBD;
+  animation: spin 1s linear infinite;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background-color: #14162E;
+  color: #e9e9e9;
+}
+.login img {
+  margin-top: 100px;
+}
+.login .hidden {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  cursor: default;
+}
+.login .show {
+  opacity: 1;
+  pointer-events: auto;
+  cursor: text;
+}
+.login h2 {
+  margin: 5px;
+  font-weight: 200;
+  margin-bottom: 5px;
+}
+.login form .form-control {
+  display: flex;
+  flex-direction: column;
+}
+.login form .form-control input {
+  margin: 10px 0px;
+  border: none;
+  background-color: #292B42;
+  border-radius: 5px;
+  padding: 9px 9px;
+  color: #e9e9e9;
+}
+.login form .form-control input:focus {
+  outline: none;
+  background-color: rgba(0, 251, 189, 0.1882352941);
+  border: 3px solid #00FBBD inset;
+  transition: all 0.6s ease-in-out;
+}
+.login form .form-control #pass {
+  transition: opacity 2s;
+  opacity: 1;
+}
+.login form button {
+  background-color: #00FBBD;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  margin: 10px 0px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.login #error {
+  margin-top: 20px;
+  font-weight: bold;
+  color: #f93535;
+}
+
+nav {
+  display: flex;
+  background-color: #292B42;
+  color: #e9e9e9;
+  padding: 10px;
+  overflow: hidden;
+}
+nav .navbar-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+nav .navbar-container span {
+  margin-right: 25px;
+}
+
+.sidebar {
+  background-color: #292B42;
+  display: flex;
+  flex-direction: column;
+  width: 65px;
+  gap: 0;
+  margin: 0;
+  overflow: hidden;
+  transition: all 0.8s ease-in-out;
+}
+.sidebar ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+.sidebar ul a {
+  text-decoration: none;
+  color: #fff;
+}
+.sidebar ul a li {
+  display: flex;
+  align-items: center;
+  padding: 5px 5px;
+  transition: 0.3s;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: rgba(217, 217, 217, 0.1647058824);
+}
+.sidebar ul a li i {
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+}
+.sidebar ul a li .titleNav {
+  opacity: 0;
+}
+.sidebar ul a li .titleNav.open {
+  display: block;
+  opacity: 1;
+  transition: opacity 1s linear 0.5s;
+}
+.sidebar ul .toggle {
+  color: white;
+  text-align: end;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+.sidebar .logout {
+  justify-self: end;
+  margin-bottom: 14px;
+}
+.sidebar .logout li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 5px;
+  transition: 0.3s;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: rgba(217, 217, 217, 0.1647058824);
+  color: #e9e9e9;
+}
+.sidebar .logout li a {
+  padding: 5px 8px;
+  border-radius: 5px;
+  color: white;
+  background-color: rgba(217, 217, 217, 0.1647058824);
+}
+.sidebar .logout li i {
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+}
+.sidebar .logout li #titleLog,
+.sidebar .logout li #logoutButton {
+  opacity: 0;
+}
+.sidebar .logout li #titleLog.open,
+.sidebar .logout li #logoutButton.open {
+  display: block;
+  opacity: 1;
+  transition: opacity 1s linear 0.5s;
+}
+.sidebar .dropdown {
+  display: none;
+  background-color: #162730;
+}
+.sidebar .dropdown li {
+  padding: 10px 50px;
+}
+.sidebar .dropdown.open {
+  display: block;
+}
+
+.sidebar.open {
+  width: 215px;
+}
+
+.leaflet-container {
+  height: 40vh;
+  width: 100%;
+  z-index: 0;
+}
+
+.container {
+  display: flex;
+  height: 96svh;
+  overflow: hidden;
+}
+.container .page {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+}
+.container .page #backPage {
+  align-self: end;
+  background-color: #00FBBD;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 5px;
+  margin: 10px 10px 0px 0px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  color: #000;
+}
+.container .page .divMap,
+.container .page .divTable,
+.container .page .details,
+.container .page .alertas {
+  display: flex;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 5px;
+  color: #e9e9e9;
+  background-color: #292B42;
+}
+.container .page .divTable {
+  height: 42vh;
+}
+.container .page .divTable table {
+  width: 100%;
+  height: 100px;
+  /* border-collapse: collapse; */
+}
+.container .page .divTable table thead th {
+  padding: 20px;
+}
+.container .page .divTable table tbody {
+  text-align: center;
+  overflow: auto;
+}
+.container .page .divTable table tbody td {
+  background-color: rgba(217, 217, 217, 0.1647058824);
+  padding: 5px;
+}
+.container .page .divTable table tbody td:first-child {
+  padding-left: 20px;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+}
+.container .page .divTable table tbody td:last-child {
+  padding-right: 5px;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.container .page .divTable table button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: rgba(217, 217, 217, 0.1647058824);
+}
+.container .page .divTable table button span {
+  display: flex;
+  align-content: center;
+  color: #e9e9e9;
+  font-weight: bold;
+}
+.container .page .divTable table button span svg {
+  margin-right: 5px;
+}
+.container .page .details {
+  height: 300px;
+  padding: 5px 10px;
+}
+.container .page .details .col {
+  padding: 10px;
+  width: 50%;
+}
+.container .page .details .col .map {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .page .details .col .leaflet-container {
+  height: 280px;
+  border-radius: 5px;
+}
+.container .page .details .col .header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.container .page .details .col h2 {
+  margin: 0;
+  font-size: 18px;
+}
+.container .page .details .col h2 span {
+  font-weight: 400;
+}
+.container .page .details .col .itinerario {
+  margin: 20px 0px;
+}
+.container .page .details .col .itinerario .control {
+  display: flex;
+  align-items: center;
+  margin: 5px 0px;
+}
+.container .page .details .col .itinerario .control svg {
+  margin-right: 10px;
+}
+.container .page .details .col .itinerario .control input {
+  border: none;
+  width: 80%;
+  border-radius: 12px;
+  color: #e9e9e9;
+  padding: 5px 10px;
+}
+.container .page .details .col hr {
+  border: none;
+  border-top: 4px dotted #4e4e4e;
+  margin: 20px 0px;
+}
+.container .page .details .col .last {
+  margin-top: 20px;
+}
+.container .page .details .col .last #lastUpdate {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #a7a7a7;
+  font-style: italic;
+}
+.container .page .alertas {
+  height: 50vh;
+  padding: 10px;
+  flex-direction: column;
+}
+.container .page .alertas button {
+  background: rgba(233, 233, 233, 0.1882352941);
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #e9e9e9;
+}
+.container .page .alertas button:hover {
+  background-color: rgba(233, 233, 233, 0.3764705882);
+  transition: all 0.5s ease-in-out;
+}
+.container .page .alertas button.active {
+  background-color: #e9e9e9;
+  color: #000;
+}
+.container .page .alertas .row {
+  height: auto;
+  max-height: 48vh;
+  overflow: auto;
+  margin: 10px 0px;
+}
+.container .page .alertas .row .NoContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40vh;
+}
+.container .page .alertas .row .NoContent h4 {
+  margin: 0px 10px;
+  font-size: 18px;
+  font-weight: 100;
+}
+.container .page .alertas .row .detection,
+.container .page .alertas .row .sider {
+  display: flex;
+  height: 440px;
+}
+.container .page .alertas .row .detection .col:first-child,
+.container .page .alertas .row .sider .col:first-child {
+  overflow: auto;
+}
+.container .page .alertas .row .detection .col,
+.container .page .alertas .row .sider .col {
+  height: 100%;
+  width: 50%;
+}
+.container .page .alertas .row .detection .col .empty,
+.container .page .alertas .row .sider .col .empty {
+  margin-left: 10px;
+  height: 100%;
+  display: flex;
+  border-radius: 5px;
+  background-color: #3d3f52;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.container .page .alertas .row .detection .col .empty h2,
+.container .page .alertas .row .sider .col .empty h2 {
+  max-width: 400px;
+  text-align: center;
+}
+.container .page .alertas .row .sider .truck {
+  height: 400px;
+  margin-left: 10px;
+  background-image: url("../images/truck.webp");
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.container .page .alertas .row .sider .truck .rowTruck {
+  padding: 25px 0px;
+  display: flex;
+  font-weight: bold;
+  width: 300px;
+  margin-left: 130px;
+  justify-content: space-between;
+}
+.container .page .alertas .row .sider .truck .rowTruck .control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container .page .alertas .row .sider .truck .rowTruck .control span {
+  margin: 5px 0px;
+}
+.container .page .alertas .row .sider .truck .rowTruck .control .circle {
+  border-radius: 40px;
+  height: 27px;
+  width: 27px;
+  background-color: grey;
+}
+.container .page .alertas .row .sider .truck .rowTruck .control .circle.active {
+  background-color: #2fff2f;
+}
+.container .page .alertas .row .sider .truck .rowTruck .control .circle.off {
+  background-color: #ff362f;
+}
+.container .page .alertas .row table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.container .page .alertas .row table tr {
+  height: 20px !important;
+  border-top: 3px solid #292B42;
+}
+.container .page .alertas .row table thead {
+  display: none;
+}
+.container .page .alertas .row table tbody h4 {
+  margin: 0;
+}
+.container .page .alertas .row table tbody td {
+  background-color: rgba(217, 217, 217, 0.1647058824);
+  padding: 5px;
+}
+.container .page .alertas .row table tbody td:first-child {
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+  width: 20px;
+}
+.container .page .alertas .row table tbody td:last-child {
+  width: 150px;
+  color: #afafaf;
+  font-style: italic;
+  padding-right: 5px;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.container .page .alertas .row table tbody .Detecção,
+.container .page .alertas .row table tbody .Sider {
+  display: flex;
+  justify-content: center;
+  color: #e9e9e9;
+  background-color: #00A1FC;
+  border-radius: 20px;
+  width: 80px;
+}
+.container .page .alertas .row table tbody .Sider {
+  background-color: #EB863E;
+}
+.container .page .alertas .row table button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: rgba(217, 217, 217, 0.1647058824);
+}
+.container .page .alertas .row table button span {
+  display: flex;
+  align-content: center;
+  color: #e9e9e9;
+  font-weight: bold;
+}
+.container .page .alertas .row table button span svg {
+  margin-right: 5px;
+}
+
+.configurations .divConfig {
+  display: flex;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 5px;
+  color: #e9e9e9;
+  background-color: #292B42;
+  height: 85vh;
+}
+.configurations .divConfig .lateral {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 300px;
+}
+.configurations .divConfig .lateral ul {
+  list-style: none;
+  padding: 0;
+}
+.configurations .divConfig .lateral ul img {
+  margin-bottom: 20px;
+}
+.configurations .divConfig .lateral ul li {
+  display: flex;
+  padding: 10px;
+  cursor: pointer;
+}
+.configurations .divConfig .lateral ul li i {
+  margin-right: 10px;
+}
+.configurations .divConfig .lateral #version {
+  color: #454545;
+  font-size: 12px;
+}
+.configurations .divConfig .config {
+  display: flex;
+}
+.configurations .divConfig .config .col,
+.configurations .divConfig .config .table {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+.configurations .divConfig .config .col button,
+.configurations .divConfig .config .table button {
+  border-radius: 5px;
+  background-color: #00FBBD;
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  margin: 15px 0px;
+  width: 200px;
+}
+.configurations .divConfig .config .col {
+  padding: 20px;
+}
+.configurations .divConfig .config .table {
+  padding: 10px;
+  background-color: rgba(69, 69, 69, 0.1254901961);
+  border-radius: 12px;
+}
+.configurations .divConfig table {
+  border-collapse: collapse;
+}
+.configurations .divConfig table thead {
+  display: none;
+}
+.configurations .divConfig table tbody tr {
+  border-top: 4px solid #2c2e42;
+  border-bottom: 4px solid #2c2e42;
+}
+.configurations .divConfig table tbody td:first-child {
+  width: 70px;
+}
+.configurations .divConfig table tbody {
+  text-align: center;
+  overflow: auto;
+}
+.configurations .divConfig table tbody td {
+  background-color: rgba(217, 217, 217, 0.1647058824);
+  padding: 5px;
+}
+.configurations .divConfig table tbody td:first-child {
+  padding-left: 20px;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+}
+.configurations .divConfig table tbody td:last-child {
+  padding-right: 5px;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.configurations .divConfig table .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background-color: #00FBBD;
+  border-radius: 50%;
+  color: #101010;
+  font-weight: 500;
+  font-size: 20px;
+}
+.configurations .divConfig table .infos_row {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.configurations .divConfig table .infos_row .email {
+  font-size: 12px;
+  color: #848484;
+}
+.configurations .divConfig table .last_event {
+  padding: 5px !important;
+  font-style: normal;
+  color: #afafaf !important;
+  background-color: rgba(175, 175, 175, 0.0705882353) !important;
+}
+.configurations .divConfig table .action a {
+  margin: 0px 5px;
+  color: #afafaf;
+}
+
+/*modal */
+.ReactModal__Overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.75) !important;
+}
+.ReactModal__Overlay .ReactModal__Content {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 20px;
+  border: none !important;
+  outline: none;
+  background-color: #292B42 !important;
+  border-radius: 4px;
+}
+.ReactModal__Overlay .ReactModal__Content button {
+  align-self: flex-end;
+  padding: 5px 10px;
+  background-color: #00FBBD;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.ReactModal__Overlay .ReactModal__Content button:hover {
+  background-color: #68fcd7;
+  transition: all 0.4 ease-in-out;
+}
+.ReactModal__Overlay .ReactModal__Content img,
+.ReactModal__Overlay .ReactModal__Content video {
+  height: 95%;
+  background-color: #101010;
+}
+.ReactModal__Overlay .ReactModal__Content.config {
+  display: flex;
+  flex-direction: column;
+  position: relative !important;
+  border: none !important;
+  padding: 0 !important;
+  outline: none;
+  background-color: #292B42 !important;
+  border-radius: 4px;
+  width: 425px;
+}
+.ReactModal__Overlay .ReactModal__Content.config button {
+  align-self: flex-end;
+  padding: 5px 10px;
+  background-color: #00FBBD;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  transition: all 0.4 ease-in-out;
+}
+.ReactModal__Overlay .ReactModal__Content.config button:hover {
+  background-color: #68fcd7;
+  transition: all 0.4 ease-in-out;
+}
+.ReactModal__Overlay .ReactModal__Content.config form {
+  color: #e9e9e9;
+  padding: 20px;
+  /* Estilo para quando um arquivo é arrastado para a área de drop */
+}
+.ReactModal__Overlay .ReactModal__Content.config form h2 {
+  margin: 0;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .file-upload {
+  position: relative;
+  display: inline-block;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .file-upload-input {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .file-upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #00FBBD;
+  border: 2px dashed #00FBBD !important;
+  padding: 20px !important;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .file-upload:hover {
+  background-color: rgba(0, 251, 189, 0.062745098);
+  transition: all 0.5s ease-in-out;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .file-upload img {
+  max-width: 100px;
+  max-height: 100px;
+  margin-bottom: 10px;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .file-upload.drag-over {
+  background-color: rgba(0, 251, 189, 0.062745098);
+  transition: all 0.5s ease-in-out;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row {
+  display: flex;
+  margin: 10px 0px;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .imagem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #606060;
+  height: 200px;
+  width: 100%;
+  border-radius: 5px;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .form-control {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 5px;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .form-control label {
+  margin-bottom: 5px;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .form-control input,
+.ReactModal__Overlay .ReactModal__Content.config form .row .form-control select {
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: rgba(186, 186, 186, 0.0705882353);
+  border: none;
+  color: #e9e9e9;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .form-control input[type=text]:focus,
+.ReactModal__Overlay .ReactModal__Content.config form .row .form-control select {
+  outline: none;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .radio-control {
+  display: flex;
+  align-items: center;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .radio-control label {
+  margin-bottom: 5px;
+  margin-left: 10px;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .radio-control input[type=radio] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  background-color: var(--form-background);
+  margin: 0;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 50%;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .radio-control input[type=radio]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  background-color: #00FBBD;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .radio-control input[type=radio]:checked::before {
+  transform: scale(1);
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .col {
+  width: 50%;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .col .explication {
+  font-size: 12px;
+  font-style: italic;
+  color: #606060;
+}
+.ReactModal__Overlay .ReactModal__Content.config .modal-footer {
+  display: flex;
+  padding: 10px;
+  justify-content: flex-end;
+  background-color: rgba(217, 217, 217, 0.1647058824);
+}
+.ReactModal__Overlay .ReactModal__Content.config .modal-footer #cancelar {
+  margin-right: 10px;
+  background-color: #606060;
+  color: #e9e9e9;
+}
+.ReactModal__Overlay .ReactModal__Content.config .modal-footer button {
+  margin: 0;
+}
+
+/* No seu arquivo App.css ou em um arquivo CSS separado */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.tooltip-container {
+  position: relative;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+}
+
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+}
+
+/* Add this CSS to your stylesheet */
+.circle {
+  /* Your existing circle styles here */
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  /* Required for positioning the tooltip */
+}
+
+.circle.off {
+  background-color: red;
+}
+
+.circle.active {
+  background-color: green;
+}
+
+.tooltip {
+  /* Tooltip styles */
+  position: absolute;
+  bottom: 100%;
+  /* Position above the circle */
+  left: 50%;
+  transform: translateX(-50%);
+  /* Center horizontally */
+  background-color: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s, visibility 0.2s;
+  white-space: nowrap;
+}
+
+.circle:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}/*# sourceMappingURL=style.css.map */
