@@ -69,7 +69,6 @@ export default function Login() {
     <>
       <div className="login">
         <CgGym id="icone-login" />
-        <h5>Não tem uma conta? <a href="/register">Registre-se</a> agora mesmo!</h5>
         <span id="error">{erro}</span>
         <form action="" onSubmit={e => handleLogin(e, user, pass)}>
           <div className="form-control">
@@ -83,6 +82,7 @@ export default function Login() {
             <button id="login">Entrar</button>
           </div>
         </form>
+        <h5>Não tem uma conta? <a href="/register">Registre-se</a> agora mesmo!</h5>
       </div>
     </>
   )
