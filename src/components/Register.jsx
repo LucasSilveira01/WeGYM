@@ -16,6 +16,7 @@ const Register = () => {
     const [senhaDiferente, setSenhaDiferente] = useState(false); // Estado para controlar a mensagem de senha diferente
     const [temLetraMaiuscula, setTemLetraMaiuscula] = useState(false);
     const [temNumero, setTemNumero] = useState(false);
+    const [temDigitos, setTemDigitos] = useState(false);
     const [senhaEmFoco, setSenhaEmFoco] = useState(false);
 
     const handleChange = (e) => {
@@ -23,12 +24,16 @@ const Register = () => {
         if (name === 'senha') {
             setTemLetraMaiuscula(false);
             setTemNumero(false);
+            setTemDigitos(false);
             // Verifique os requisitos da senha
             const temMaiuscula = /[A-Z]/.test(value);
             setTemLetraMaiuscula(temMaiuscula);
             // Verifique se a senha tem pelo menos um número
             const temNumero = /\d/.test(value);
             setTemNumero(temNumero);
+            // Verifique se a senha tem 8 digitos
+            const temDigitos = value.length >= 8 ? true : false
+            setTemDigitos(temDigitos);
         } else if (name === 'confirmarSenha') {
             // Se o campo de confirmação de senha estiver mudando, verifique se coincide com a senha
             const senha = formData.senha;
@@ -39,7 +44,7 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (senhaDiferente || !temLetraMaiuscula || !temNumero) {
+        if (senhaDiferente || !temLetraMaiuscula || !temNumero || !temDigitos) {
             // Se as senhas ainda forem diferentes ou a senha não atender aos requisitos, não envie o formulário
             return;
         }
@@ -98,6 +103,9 @@ const Register = () => {
                         </p>
                         <p className={` ${temNumero ? 'senha-valida' : 'senha-invalida'}`}>
                             {!temNumero ? <FaTimes /> : <FaCheck />}A senha deve conter pelo menos um número.
+                        </p>
+                        <p className={` ${temDigitos ? 'senha-valida' : 'senha-invalida'}`}>
+                            {!temDigitos? <FaTimes /> : <FaCheck />}A senha deve conter pelo menos 8 dígitos.
                         </p>
                     </div>
                 )}
