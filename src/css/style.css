@@ -356,7 +356,6 @@ nav .navbar-container {
   margin-right: 5px;
 }
 .container .page .details {
-  height: 300px;
   padding: 5px 10px;
 }
 .container .page .details .col {
@@ -1215,4 +1214,395 @@ a {
     padding: 5px;
   }
   /* Outros estilos específicos para dispositivos móveis */
+}
+.ReactModal__Overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.75) !important;
+}
+.ReactModal__Overlay .ReactModal__Content.config {
+  display: flex;
+  flex-direction: column;
+  position: relative !important;
+  border: none !important;
+  padding: 0 !important;
+  outline: none;
+  background-color: #355375 !important;
+  border-radius: 4px;
+  width: 850px;
+}
+.ReactModal__Overlay .ReactModal__Content.config button {
+  align-self: flex-end;
+  padding: 5px 10px;
+  background-color: #f6b95c;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #FFFDFA;
+  transition: all 0.4s ease-in-out;
+}
+.ReactModal__Overlay .ReactModal__Content.config button:hover {
+  background-color: #f6c57b;
+  transition: all 0.4s ease-in-out;
+}
+.ReactModal__Overlay .ReactModal__Content.config form {
+  color: #e9e9e9;
+  padding: 20px;
+  /* Estilo para quando um arquivo é arrastado para a área de drop */
+}
+.ReactModal__Overlay .ReactModal__Content.config form h2 {
+  margin: 0;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .file-upload {
+  position: relative;
+  display: inline-block;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .file-upload-input {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .file-upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #f6b95c;
+  border: 2px dashed #f6b95c !important;
+  padding: 20px !important;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 100%;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .file-upload:hover {
+  background-color: rgba(246, 185, 92, 0.062745098);
+  transition: all 0.5s ease-in-out;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .file-upload img {
+  max-width: 100px;
+  max-height: 100px;
+  margin-bottom: 10px;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .file-upload.drag-over {
+  background-color: rgba(0, 251, 189, 0.062745098);
+  transition: all 0.5s ease-in-out;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .header {
+  display: flex;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .header input[type=date] {
+  padding: 5px 20px;
+  margin-left: 20px;
+  border-radius: 50px;
+  border: none;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row {
+  display: flex;
+  margin: 10px 0px;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .imagem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #606060;
+  height: 200px;
+  width: 100%;
+  border-radius: 5px;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .form-control {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 5px;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .form-control label {
+  margin-bottom: 5px;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .form-control input,
+.ReactModal__Overlay .ReactModal__Content.config form .row .form-control select {
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: rgba(186, 186, 186, 0.0705882353);
+  border: none;
+  color: #e9e9e9;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .form-control input[type=number]:focus,
+.ReactModal__Overlay .ReactModal__Content.config form .row .form-control select {
+  outline: none;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 50%;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .col .explication {
+  font-size: 12px;
+  font-style: italic;
+  color: #606060;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .colBottom {
+  display: flex !important;
+  flex-direction: column !important;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .colBottom .form-control {
+  flex-direction: row;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .colBottom .form-control label {
+  width: 50%;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .colCalc {
+  display: flex;
+  flex-direction: column;
+}
+.ReactModal__Overlay .ReactModal__Content.config form .row .colCalc span {
+  width: 100%;
+}
+.ReactModal__Overlay .ReactModal__Content.config .modal-footer {
+  display: flex;
+  padding: 10px;
+  justify-content: flex-end;
+  background-color: rgba(217, 217, 217, 0.1647058824);
+}
+.ReactModal__Overlay .ReactModal__Content.config .modal-footer #cancelar {
+  margin-right: 10px;
+  background-color: #606060;
+  color: #e9e9e9;
+}
+.ReactModal__Overlay .ReactModal__Content.config .modal-footer button {
+  margin: 0;
+}
+
+.container-metrics {
+  display: flex;
+  flex-direction: column;
+  align-self: end;
+  justify-self: flex-end;
+  width: 90svw;
+  height: 90svh;
+  padding: 20px;
+  border-top-left-radius: 20px;
+}
+.container-metrics button {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 25px;
+  background-color: #f3a93b;
+  color: #FFFDFA;
+}
+.container-metrics button:hover {
+  background-color: #f6b95c;
+  transition: all 0.5s ease-in-out;
+}
+.container-metrics .nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.container-metrics .row {
+  display: flex;
+  height: 72%;
+}
+.container-metrics .row h4 {
+  margin: 0;
+  margin-bottom: 10px;
+}
+.container-metrics .row span {
+  margin-bottom: 5px;
+}
+.container-metrics .row .col {
+  width: 50%;
+  margin-bottom: 10px;
+}
+.container-metrics .row .col:first-child {
+  margin-right: 5px;
+}
+.container-metrics .row .col:last-child {
+  margin-left: 5px;
+}
+.container-metrics .row .basicInfos h3 span {
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 100;
+}
+.container-metrics .row .basicInfos .card-group {
+  display: flex;
+}
+.container-metrics .row .basicInfos .card-group .card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  width: 100%;
+  padding: 10px;
+}
+.container-metrics .row .basicInfos .card-group .card:first-child {
+  margin-right: 5px;
+}
+.container-metrics .row .basicInfos .card-group .card:last-child {
+  margin-left: 5px;
+}
+.container-metrics .row .basicInfos .details {
+  margin-top: 15px;
+  display: flex;
+  font-size: 20px;
+  margin: 20px 0px;
+}
+.container-metrics .row .basicInfos .details span {
+  width: 100%;
+}
+.container-metrics .row .basicInfos .more {
+  display: flex;
+}
+.container-metrics .row .basicInfos .more .col-more {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  width: 100%;
+  padding: 10px;
+}
+.container-metrics .row .basicInfos .more .col-more:first-child {
+  margin-right: 5px;
+}
+.container-metrics .row .basicInfos .more .col-more:last-child {
+  margin-left: 5px;
+}
+.container-metrics .row .tableColumn .table {
+  border-radius: 10px;
+  height: 92%;
+  padding: 15px;
+  overflow: auto;
+}
+.container-metrics .row .tableColumn .table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.container-metrics .row .tableColumn .table table thead tr {
+  height: 40px;
+}
+.container-metrics .row .tableColumn .table table tbody tr {
+  border-top: 4px solid #355375;
+  border-bottom: 4px solid #355375;
+}
+.container-metrics .row .tableColumn .table table tbody {
+  text-align: center;
+  overflow: auto;
+}
+.container-metrics .row .tableColumn .table table tbody td {
+  padding: 5px;
+}
+.container-metrics .row .tableColumn .table table tbody td:first-child {
+  padding-left: 20px;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+}
+.container-metrics .row .tableColumn .table table tbody td:last-child {
+  padding-right: 5px;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.container-metrics .row .tableColumn .table table .action {
+  background-color: #f3a93b;
+  border-radius: 40px;
+}
+.container-metrics .row .tableColumn .table table .action a {
+  margin: 0px 5px;
+  color: #FFFDFA;
+  text-decoration: none;
+}
+.container-metrics .row .tableColumn .table table .action:hover {
+  background-color: #f6b95c;
+  transition: all 0.5s ease-in-out;
+}
+.container-metrics .row .chartCol .container-col {
+  padding: 10px;
+  border-radius: 12px;
+}
+.container-metrics .row .chartCol .container-col canvas {
+  margin: auto;
+  width: 95% !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .grid {
+    display: flex;
+    flex-direction: column;
+  }
+  .container-metrics {
+    padding: 10px 10px;
+    border-radius: 0;
+    width: 100%;
+    overflow: auto;
+  }
+  .container-metrics .row {
+    flex-direction: column;
+    margin: 10px 0px;
+    height: auto;
+  }
+  .container-metrics .row .col {
+    width: 100%;
+  }
+  .container-metrics .row .col:first-child {
+    margin-right: 0px;
+  }
+  .container-metrics .row .col:last-child {
+    margin-left: 0px;
+  }
+  .container-metrics .row .basicInfos .card-group {
+    flex-direction: column;
+  }
+  .container-metrics .row .basicInfos .card-group .card {
+    margin: 5px 0px;
+    width: auto;
+  }
+  .container-metrics .row .basicInfos .card-group .card:first-child {
+    margin-right: 0px;
+  }
+  .container-metrics .row .basicInfos .card-group .card:last-child {
+    margin-left: 0px;
+  }
+  .container-metrics .row .basicInfos .details {
+    flex-direction: column;
+  }
+  .container-metrics .row .basicInfos .more {
+    flex-direction: column;
+  }
+  .container-metrics .row .basicInfos .more .col-more {
+    width: auto;
+    margin: 5px 0px;
+  }
+  .container-metrics .row .basicInfos .more .col-more:first-child {
+    margin-right: 0px;
+  }
+  .container-metrics .row .basicInfos .more .col-more:last-child {
+    margin-left: 0px;
+  }
+  .container-metrics .row .tableColumn .table {
+    flex-direction: column;
+    height: 300px;
+    margin-top: -12px;
+    margin-bottom: 12px;
+  }
+  .container-metrics .row .chartCol .container-col canvas {
+    width: auto;
+  }
+  .ReactModal__Content.config {
+    width: 100% !important;
+    height: 90svh !important;
+    overflow: auto;
+  }
+  .ReactModal__Content.config form .row {
+    flex-direction: column;
+  }
+  .ReactModal__Content.config form .row .col {
+    display: flex !important;
+    flex-direction: column;
+    width: auto !important;
+  }
+  .ReactModal__Content.config form .file-upload {
+    width: auto !important;
+  }
 }/*# sourceMappingURL=style.css.map */

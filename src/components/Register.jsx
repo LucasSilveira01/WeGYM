@@ -11,7 +11,8 @@ const Register = () => {
         nome: '',
         sobrenome: '',
         sexo: '',
-        idade: ''
+        idade: '',
+        altura: '',
     });
     const [senhaDiferente, setSenhaDiferente] = useState(false); // Estado para controlar a mensagem de senha diferente
     const [temLetraMaiuscula, setTemLetraMaiuscula] = useState(false);
@@ -105,7 +106,7 @@ const Register = () => {
                             {!temNumero ? <FaTimes /> : <FaCheck />}A senha deve conter pelo menos um número.
                         </p>
                         <p className={` ${temDigitos ? 'senha-valida' : 'senha-invalida'}`}>
-                            {!temDigitos? <FaTimes /> : <FaCheck />}A senha deve conter pelo menos 8 dígitos.
+                            {!temDigitos ? <FaTimes /> : <FaCheck />}A senha deve conter pelo menos 8 dígitos.
                         </p>
                     </div>
                 )}
@@ -161,7 +162,6 @@ const Register = () => {
                         <option value="">Selecione o sexo</option>
                         <option value="M">Masculino</option>
                         <option value="F">Feminino</option>
-                        <option value="O">Outro</option>
                     </select>
                 </div>
                 <div>
@@ -171,6 +171,17 @@ const Register = () => {
                         id="idade"
                         name="idade"
                         value={formData.idade}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor="idade">Altura:</label>
+                    <input
+                        type="text"
+                        id="altura"
+                        name="altura"
+                        value={formData.altura}
                         onChange={handleChange}
                         required
                     />

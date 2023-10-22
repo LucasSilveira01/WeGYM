@@ -7,6 +7,158 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 require('dotenv').config();
 const jwtSecret = process.env.JWT_SECRET;
+const multer = require('multer');
+const fs = require('fs');
+
+const path = require('path');
+
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const { username } = req.params;
+    const uploadPath = `./uploads/${username}`;
+
+    if (!fs.existsSync(uploadPath)) {
+      fs.mkdirSync(uploadPath, { recursive: true });
+    }
+
+    cb(null, uploadPath);
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname);
+  },
+});
+app.use(cors());
+
+app.get('/get_person/:id', (req, res) => {
+  const sql = 'SELECT * FROM person WHERE id = ' + req.params.id;
+  db.query(sql, (err, rows) => {
+    if (err) {
+      console.log(err);
+      res.status(500);
+      return;
+    }
+    res.status(200).send(rows);
+  })
+})
+
+app.get('/get_measures/:id', (req, res) => {
+  const sql = 'SELECT m.* FROM measure m JOIN user u ON m.person = u.id WHERE m.person =' + req.params.id;
+  db.query(sql, (err, rows) => {
+    if (err) {
+      console.log(err);
+      res.status(500);
+      return;
+    }
+    res.status(200).send(rows);
+  })
+})
+
+
+app.get('/get_last_measures/:id', (req, res) => {
+  const sql = 'SELECT * FROM measure m WHERE m.person =' + req.params.id + ' ORDER BY m.id DESC LIMIT 1';
+  db.query(sql, (err, rows) => {
+    if (err) {
+      console.log(err);
+      res.status(500);
+      return;
+    }
+    res.status(200).send(rows);
+  })
+})
+
+app.get('/get_espec_measures/:id', (req, res) => {
+  const sql = 'SELECT * FROM measure WHERE id = ' + req.params.id + '';
+  db.query(sql, (err, rows) => {
+    if (err) {
+      console.log(err);
+      res.status(500);
+      return;
+    }
+    res.status(200).send(rows);
+  })
+})
+
+app.get('/get_all_measures/:id', (req, res) => {
+  const sql = "SELECT id, DATE_FORMAT(measureDate, '%d/%m/%Y') AS data, percentage, weight FROM measure WHERE measure.person = " + req.params.id;
+  db.query(sql, (err, rows) => {
+    if (err) {
+      console.log(err);
+      res.status(500);
+      return;
+    }
+    res.status(200).send(rows);
+  })
+})
+const upload = multer({ storage: storage });
+
+
+app.post('/set_measure/:username', upload.single('photo'), (req, res) => {
+  const { username } = req.params;
+  const {
+    person,
+    BF,
+    IMC,
+    abdomen,
+    hips,
+    leftArm,
+    leftCalf,
+    leftForearm,
+    leftThigh,
+    measureDate,
+    neck,
+    rightArm,
+    rightCalf,
+    rightForearm,
+    rightThigh,
+    weight,
+  } = req.body;
+
+  console.log(req.file);
+
+  const tempImagePath = req.file.path;
+  const dateOfMeasurement = new Date().toISOString().slice(0, 10);
+  const newFileName = `${dateOfMeasurement}-${username}.jpg`;
+  const newFilePath = path.join('./uploads/', username, newFileName);
+
+  fs.rename(tempImagePath, newFilePath, (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ message: 'Erro ao renomear o arquivo.' });
+    }
+
+    const measurementData = {
+      person,
+      measureDate,
+      weight,
+      neck,
+      abdomen,
+      hips,
+      leftArm,
+      rightArm,
+      leftForearm,
+      rightForearm,
+      leftThigh,
+      rightThigh,
+      IMC,
+      percentage: BF,
+      rightCalf,
+      leftCalf,
+      file: newFilePath,
+      chest: 0
+    };
+
+    const sql = 'INSERT INTO measure SET ?';
+    db.query(sql, measurementData, (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Erro ao salvar os dados da medição no banco de dados.' });
+      }
+
+      res.status(201).json({ message: 'Medição criada com sucesso.', measurement: measurementData });
+    });
+  });
+});
 
 const db = mysql.createPool({
   host: "localhost",
@@ -17,7 +169,6 @@ const db = mysql.createPool({
 })
 
 
-app.use(cors());
 app.use(express.json());
 
 const getUserRole = (username) => {
@@ -55,15 +206,15 @@ const verifyToken = (req, res, next) => {
 };
 
 app.post('/register', (req, res) => {
-  const { email, senha, nome, sobrenome, sexo, idade } = req.body;
+  const { email, senha, nome, sobrenome, sexo, idade, altura } = req.body;
   const role = 'user';
   bcrypt.hash(senha, saltRounds, (err, hash) => {
     if (err) {
       console.error(err);
       res.status(500).send({ error: 'Erro interno do servidor' });
     } else {
-      const SQL = "INSERT INTO user (user, pass,role, nome, sobrenome,sexo,idade) VALUES (?,?,?, ?,?,?,?)";
-      const data = [email, hash, role, nome, sobrenome, sexo, idade];
+      const SQL = "INSERT INTO user (user, pass,role, nome, sobrenome,sexo,idade,altura) VALUES (?,?,?, ?,?,?,?,?)";
+      const data = [email, hash, role, nome, sobrenome, sexo, idade, altura];
 
       db.query(SQL, data, (dbErr, result) => {
         if (dbErr) {
@@ -95,12 +246,14 @@ app.post('/login', (req, res) => {
       const role = result[0].role;
       const idade = result[0].idade;
       const sexo = result[0].sexo;
+      const altura = result[0].altura;
+
       bcrypt.compare(pass, storedHash, (compareErr, match) => {
         if (compareErr || !match) {
           return res.status(401).json({ error: 'Credenciais inválidas' });
         }
         const token = jwt.sign({ user: user }, jwtSecret, { expiresIn: '1h' });
-        res.status(200).json({ token, user, nome, sobrenome, id, role, idade, sexo });
+        res.status(200).json({ token, user, nome, sobrenome, id, role, idade, sexo, altura });
       });
     } else {
       res.status(401).json({ error: 'Credenciais inválidas' });

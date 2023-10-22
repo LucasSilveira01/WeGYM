@@ -20,13 +20,14 @@ export default function Login() {
     });
 
     if (response.ok) {
-      const { token, user, nome, sobrenome, id, role, idade, sexo } = await response.json();
+      const { token, user, nome, sobrenome, id, role, idade, sexo, altura } = await response.json();
       localStorage.setItem('user', nome + ' ' + sobrenome);
       localStorage.setItem('token', token);
       localStorage.setItem('id', id)
       localStorage.setItem('role', role);
       localStorage.setItem('idade', idade);
       localStorage.setItem('sexo', sexo);
+      localStorage.setItem('height', altura);
       handleSignIn(true);
       setErro('');
       navigate('/principal')
