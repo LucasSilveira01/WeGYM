@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Login from './Login';
 import Home from './pages/Home';
 import Metrics from './pages/Metrics'
+import Treinos from './pages/Treinos'
 import './css/style.css'
 import 'leaflet/dist/leaflet.css';
 import Register from './components/Register'
@@ -28,7 +29,7 @@ function App() {
             <Routes>
               <Route path='/principal' element={<Private Item={Home} />} />
               <Route path='/metrics' element={<Private Item={Metrics} />} />
-
+              <Route path='/treinos' element={<Private Item={Treinos} />} />
               <Route exact path='/*' element={<Login />} />
               <Route path='/register' element={<Register />} />
             </Routes>

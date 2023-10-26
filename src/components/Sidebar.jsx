@@ -4,7 +4,7 @@ import { FiMenu, FiLogOut } from 'react-icons/fi';
 import { AiFillHome } from 'react-icons/ai'
 import { BsGearFill } from 'react-icons/bs'
 import { SignedInContext } from '../hooks/Context'
-
+import { CgGym } from 'react-icons/cg'
 export default function Sidebar() {
     const user = localStorage.getItem('user');
     const { handleSignIn } = useContext(SignedInContext);
@@ -48,7 +48,13 @@ export default function Sidebar() {
                 <a href="/metrics">
                     <li>
                         <i><BsGearFill /></i>
-                        <span className='titleNav'>Configuração</span>
+                        <span className='titleNav'>Métricas</span>
+                    </li>
+                </a>
+                <a href="/treinos">
+                    <li>
+                        <i><CgGym /></i>
+                        <span className='titleNav'>Treinos</span>
                     </li>
                 </a>
             </ul>

@@ -34,7 +34,7 @@ export default function Navbar(className) {
         <div className={`navbar-container ${className.className}`}>
             <nav >
                 <div className={`navbar-container`}>
-                    <span>WeGYM</span>
+                    <span>Treino+</span>
                     <div style={{ display: 'flex' }}>
                         <span id="welcome"></span>
                         <Slider isChecked={isDarkTheme} onToggle={toggleTheme} />

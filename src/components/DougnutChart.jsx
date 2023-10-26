@@ -11,8 +11,8 @@ const DoughnutChart = (calories, render) => {
         labels: ['Calorias Gastas'],
         datasets: [
             {
-                backgroundColor: ["#FCA311", "#000"], // Cor de fundo das áreas sob a linha
-                data: [calories.calories, calories.calories - 200],
+                backgroundColor: ["#FCA311"], // Cor de fundo das áreas sob a linha
+                data: [calories.calories],
                 borderWidth: 0,
             },
         ],

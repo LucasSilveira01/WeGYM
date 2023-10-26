@@ -63,8 +63,8 @@ const Table = ({ setMeasure }) => {
                 Cell: ({ row }) => {
                     const { ID } = row.original;
                     return (
-                        <div className='action'>
-                            <a onClick={() => handleOnClick(ID)}>Visualizar</a>
+                        <div className='action' onClick={() => handleOnClick(ID)} style={{ textAlign: 'center' }}>
+                            <a >Visualizar</a>
                         </div>
                     )
                 }

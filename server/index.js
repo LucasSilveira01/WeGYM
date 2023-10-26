@@ -345,7 +345,43 @@ app.post('/get-date', (req, res) => {
   });
 });
 
+app.post('/salvar-treinos', (req, res) => {
+  const { selectedWorkouts, id } = req.body;
+  // Itere pelos treinos selecionados e insira-os na tabela
+  selectedWorkouts.forEach((treino) => {
+    const { title, content, category, backgroundImage } = treino;
+    const query = 'INSERT INTO treinos (title, content, category, backgroundImage, user) VALUES (?, ?, ?, ?, ?)';
 
+    db.query(query, [title, content, category, backgroundImage, id], (err, results) => {
+      if (err) {
+        console.error('Erro ao inserir treino:', err);
+      }
+    });
+  });
+
+  // Responder com uma mensagem de sucesso
+  res.json({ message: 'Treinos salvos com sucesso!' });
+});
+
+app.get('/obter-treinos/:userId', (req, res) => {
+  const userId = req.params.userId;
+  if (!userId) {
+    return res.status(400).json({ message: 'ID do usuário não fornecido.' });
+  }
+
+  // Consulta SQL para selecionar os treinos de um usuário específico
+  const query = 'SELECT title, content, category, backgroundImage,video FROM treinos WHERE user = ?';
+
+  db.query(query, [userId], (err, results) => {
+    if (err) {
+      console.error('Erro ao consultar treinos:', err);
+      return res.status(500).json({ message: 'Erro ao consultar treinos.' });
+    }
+
+    // Retorna os treinos como uma resposta JSON
+    res.json(results);
+  });
+});
 
 app.listen(5000, () => {
   console.log("Server init");

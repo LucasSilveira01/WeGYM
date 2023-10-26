@@ -56,6 +56,7 @@ export default function Chart({ chartType }) {
         <div>
             {data && data.labels && data.labels.length > 0 ? (
                 <Line
+                    id={chartType == 'bf' ? 'bf' : 'peso'}
                     data={data}
                     options={{
                         plugins: {
@@ -91,6 +92,7 @@ export default function Chart({ chartType }) {
                 />
             ) : (
                 <Line
+
                     data={{
                         datasets: [
                             {

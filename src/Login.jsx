@@ -83,7 +83,7 @@ export default function Login() {
             <button id="login">Entrar</button>
           </div>
         </form>
-        <h5>Não tem uma conta? <a href="/register">Registre-se</a> agora mesmo!</h5>
+        <h5 style={{ textAlign: 'center' }}>Não tem uma conta? <br></br><a href="/register">Registre-se</a> agora mesmo!</h5>
       </div>
     </>
   )
