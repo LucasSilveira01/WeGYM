@@ -3,8 +3,8 @@ $background: #000;
 $div: #050607;
 
 
-
-$background-light: #fff;
+$background-light: #F0F0F0;
+$background-sidebar: #fff;
 
 ::-webkit-scrollbar {
     background-color: #101010;
@@ -372,7 +372,7 @@ nav {
     }
 
     .page {
-        display: flex;
+        //display: flex;
         overflow: auto;
         width: 100%;
         height: 100%;
@@ -934,56 +934,61 @@ nav {
 
 
 
-/* Slider.css */
 .slider-container {
     display: flex;
     align-items: center;
-    gap: 10px;
 }
 
 .slider {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
+    width: 50px;
+    /* Ajuste o tamanho do slider conforme necessário */
+    height: 24px;
+    /* Ajuste a altura do slider conforme necessário */
+    background-color: #ccc;
+    /* Cor de fundo quando o slider está desligado */
+    border-radius: 30px;
+    /* Deixa o slider com forma de uma bolinha */
 }
 
 .slider input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+    display: none;
+    /* Oculta o input padrão */
 }
 
 .slider-switch {
     position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    border-radius: 34px;
-    transition: 0.4s;
-}
-
-.slider-switch:before {
-    position: absolute;
-    content: '';
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
+    width: 24px;
+    /* Tamanho da bolinha */
+    height: 24px;
+    /* Tamanho da bolinha */
     border-radius: 50%;
+    /* Formato de uma bolinha */
+    background-color: #fff;
+    /* Cor de fundo da bolinha */
     transition: 0.4s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+        color: #000;
+    }
 }
 
+/* Estiliza a posição do ícone dentro da bolinha */
 .slider input:checked+.slider-switch {
-    background-color: #2196F3;
-}
+    left: 26px;
+    /* Move a bolinha para a direita quando o slider está ligado */
+    background-color: #007BFF;
+    /* Cor de fundo da bolinha quando o slider está ligado */
+    color: #fff;
 
-.slider input:checked+.slider-switch:before {
-    transform: translateX(26px);
+    /* Cor do ícone quando o slider está ligado */
+    svg {
+        color: #fff;
+    }
 }
 
 .Home_content {
@@ -1030,14 +1035,52 @@ nav {
 
 
     nav {
-        background-color: $background-light;
+        background-color: $background-sidebar;
         color: #000;
         transition: background-color 0.3s ease, color 0.3s ease;
     }
 
+    .page {
+        background-color: $background-light;
+        color: black;
+    }
 
+    .sidebar {
+        background-color: $background-sidebar;
 
+        a {
+            color: #000;
+        }
 
+        .toggle {
+            color: #000;
+
+        }
+
+        .logout {
+            li {
+                color: #000;
+            }
+
+            a {
+                color: #000;
+
+            }
+        }
+    }
+
+    .calendar {
+
+        h3 {
+            color: #000 !important;
+        }
+
+        .calendar-grid {
+            .calendar-day {
+                border: .5px solid #000;
+            }
+        }
+    }
 }
 
 /* Estilos para a div container */
@@ -1131,7 +1174,6 @@ nav {
     align-self: center;
     margin: auto;
     margin-top: 40px;
-    min-width: 766px;
 
     input[type="text"] {
         margin-bottom: 10px;
@@ -1437,11 +1479,11 @@ a {
 
     input {
         margin: 10px 0px;
-        border: none;
-        background-color: grey;
+        border: 1px solid #000;
+        background-color: #fff;
         border-radius: 5px;
         padding: 9px 9px;
-        color: #e9e9e9;
+        color: #000;
     }
 
     input:focus {
@@ -1934,11 +1976,151 @@ a {
     }
 }
 
+
+
+.treinos {
+
+    /* WorkoutSelector.css */
+    .input-search {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+}
+
+.more {
+    display: flex;
+
+    .col-more {
+        display: flex;
+        flex-direction: column;
+        border-radius: 8px;
+        width: 100%;
+        background-color: #070606;
+        padding: 10px;
+    }
+
+    .col-more:first-child {
+        margin-right: 5px;
+    }
+
+    .col-more:last-child {
+        margin-left: 5px;
+    }
+}
+
+
+/* Defina as cores principais */
+:root {
+    --main-color: black;
+    --secondary-color: orange;
+}
+
+/* Estilize o contêiner dos treinos */
+.workout-container {
+    padding: 20px;
+    background-color: var(--main-color);
+    color: white;
+}
+
+/* Estilize os itens da lista de treinos */
+.workout-item {
+    cursor: pointer;
+    padding: 10px;
+    background-color: var(--secondary-color);
+    margin: 5px;
+    border: 1px solid var(--main-color);
+}
+
+/* Estilize o campo de entrada e a lista de exercícios */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: var(--main-color);
+    color: white;
+    border: 1px solid var(--secondary-color);
+}
+
+/* Estilize o treino personalizado selecionado */
+.selected-workout {
+    background-color: var(--secondary-color);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid var(--main-color);
+}
+
+.custom-select {
+    /* Estilo do plano de fundo */
+    background-color: #f0f0f0;
+    /* Cor da borda */
+    border: 1px solid #ccc;
+    /* Cor do texto */
+    color: #333;
+    /* Estilo do cursor quando hover */
+    cursor: pointer;
+    /* Estilo da borda arredondada */
+    border-radius: 5px;
+    /* Adicione espaçamento interno */
+    padding: 5px;
+    /* Defina a largura e altura personalizadas */
+    width: 200px;
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+.calendar-container {
+    display: flex;
+}
+
 @media only screen and (max-width: 600px) {
+    .modal-content {
+        width: 80%;
+    }
+
+    .treinos {
+
+        /* WorkoutSelector.css */
+
+        .row {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+
+            .column {
+                margin-top: 10px;
+            }
+        }
+
+    }
+
+    .calendar-container {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .card-container {
+        .row {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .column {
+                margin-top: 10px;
+            }
+        }
+    }
+
     .grid {
         display: flex;
         flex-direction: column;
     }
+
 
 
     .container-metrics {
@@ -2024,8 +2206,8 @@ a {
     }
 
     .ReactModal__Content.config {
-        width: 100% !important;
-        height: 90svh !important;
+        width: 80% !important;
+        height: 70svh !important;
         overflow: auto;
 
         form {
@@ -2046,39 +2228,4 @@ a {
 
     }
 
-}
-
-.treinos {
-
-    /* WorkoutSelector.css */
-    .input-search {
-        width: 100%;
-        padding: 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-bottom: 10px;
-    }
-
-}
-
-.more {
-    display: flex;
-
-    .col-more {
-        display: flex;
-        flex-direction: column;
-        border-radius: 8px;
-        width: 100%;
-        background-color: #070606;
-        padding: 10px;
-    }
-
-    .col-more:first-child {
-        margin-right: 5px;
-    }
-
-    .col-more:last-child {
-        margin-left: 5px;
-    }
 }

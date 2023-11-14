@@ -14,7 +14,6 @@ function CardContainer() {
     const [cardsData, setCardsData] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedCard, setSelectedCard] = useState(null);
-
     const openModal = (card) => {
         setSelectedCard(card);
         setIsModalOpen(true);
@@ -29,6 +28,7 @@ function CardContainer() {
             .then((response) => response.json())
             .then((data) => {
                 setCardsData(data);
+                setFilteredCategory(data[0].nome);
             })
             .catch((error) => {
                 console.error('Erro ao obter treinos:', error);
@@ -41,9 +41,9 @@ function CardContainer() {
         setFilteredCategory(category);
     };
 
-    const filteredCards = filteredCategory === 'Peito'
-        ? cardsData.filter(card => card.category === filteredCategory)
-        : cardsData.filter(card => card.category === filteredCategory);
+    const filteredCards = filteredCategory === 'Treino A'
+        ? cardsData.filter(card => card.nome === filteredCategory)
+        : cardsData.filter(card => card.nome === filteredCategory);
     const filters = [
 
         { title: 'Peito', backgroundImage: '../src/images/Peito.jpeg' },
@@ -51,7 +51,6 @@ function CardContainer() {
         { title: 'Costas', backgroundImage: '../src/images/Costas.jpeg' },
         { title: 'Biceps', backgroundImage: '../src/images/Biceps.jpeg' },
         { title: 'Ombro', backgroundImage: '../src/images/Ombro.webp' }]
-
 
 
 
@@ -63,10 +62,15 @@ function CardContainer() {
                 {cardsData.length > 0 ? (
 
                     <>
+                        <select onChange={(e) => setFilteredCategory(e.target.value)} className="custom-select">
+                            {[...new Set(cardsData.map(card => card.nome))].map((nome, index) => (
+                                <option key={index} value={nome}>{nome}</option>
+                            ))}
+                        </select>
 
                         <div className="row">
                             {filteredCards.length > 0 ? (
-                                filteredCards.slice(0, 3).map((card, index) => (
+                                filteredCards.slice(0, 5).map((card, index) => (
                                     <div key={index} className="column" onClick={() => openModal(card)}>
                                         <div className="card-background" style={{ backgroundImage: `url(${card.backgroundImage})` }}></div>
                                         <Card title={card.title} content={card.content} backgroundImage={card.backgroundImage} />
@@ -79,7 +83,7 @@ function CardContainer() {
                             )}
                         </div>
                         <div className="row">
-                            {filteredCards.slice(3).map((card, index) => (
+                            {filteredCards.slice(5).map((card, index) => (
                                 <div key={index} className="column">
                                     <div className="card-background" style={{ backgroundImage: `url(${card.backgroundImage})` }}></div>
                                     <Card title={card.title} content={card.content} backgroundImage={card.backgroundImage} />
@@ -93,32 +97,32 @@ function CardContainer() {
                     </>
                 )}
             </div >
-            <div className="card-container category-filter">
+            {/* <div className="card-container category-filter">
                 <h2>Outros Treinos</h2>
 
                 <div className="row">
-                    {filters.slice(0, 3).map((category, index) => (
+                    {cardsData.slice(0, 3).map((category, index) => (
                         <>
                             <div className="column">
 
-                                <div className="card-background" style={{ backgroundImage: `url(${category.backgroundImage})` }} onClick={() => handleCategoryClick(category.title)}></div>
-                                <Card title={category.title} content={category.content} backgroundImage={category.backgroundImage} />
+                                <div className="card-background" style={{ backgroundImage: `url(${category.backgroundImage})` }} onClick={() => handleCategoryClick(category.nome)}></div>
+                                <Card title={category.nome} content={''} backgroundImage={category.backgroundImage} />
                             </div>
                         </>
                     ))}
                 </div>
                 <div className="row-filter">
-                    {filters.slice(3).map((category, index) => (
+                    {cardsData.slice(3).map((category, index) => (
                         <>
                             <div className="column">
 
-                                <div className="card-background" style={{ backgroundImage: `url(${category.backgroundImage})` }} onClick={() => handleCategoryClick(category.title)}></div>
-                                <Card title={category.title} content={category.content} backgroundImage={category.backgroundImage} />
+                                <div className="card-background" style={{ backgroundImage: `url(${category.backgroundImage})` }} onClick={() => handleCategoryClick(category.nome)}></div>
+                                <Card title={category.nome} content={''} backgroundImage={category.backgroundImage} />
                             </div>
                         </>
                     ))}
                 </div>
-            </div>
+            </div> */}
             {isModalOpen && selectedCard && (
                 <div className="modal">
                     <div className="modal-content">

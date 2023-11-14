@@ -10,7 +10,7 @@ import './css/style.css'
 import 'leaflet/dist/leaflet.css';
 import Register from './components/Register'
 import { ThemeProvider, useTheme } from './context/ThemeContext'
-
+import WorkoutPage from './components/Workout';
 
 const Private = ({ Item }) => {
   const signed = useContext(SignedInContext);
@@ -30,6 +30,7 @@ function App() {
               <Route path='/principal' element={<Private Item={Home} />} />
               <Route path='/metrics' element={<Private Item={Metrics} />} />
               <Route path='/treinos' element={<Private Item={Treinos} />} />
+              <Route path='/workout' element={<Private Item={WorkoutPage} />} />
               <Route exact path='/*' element={<Login />} />
               <Route path='/register' element={<Register />} />
             </Routes>

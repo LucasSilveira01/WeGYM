@@ -346,13 +346,13 @@ app.post('/get-date', (req, res) => {
 });
 
 app.post('/salvar-treinos', (req, res) => {
-  const { selectedWorkouts, id } = req.body;
+  const { selectedWorkouts, id, nome } = req.body;
   // Itere pelos treinos selecionados e insira-os na tabela
   selectedWorkouts.forEach((treino) => {
-    const { title, content, category, backgroundImage } = treino;
-    const query = 'INSERT INTO treinos (title, content, category, backgroundImage, user) VALUES (?, ?, ?, ?, ?)';
+    const { title, content, category, backgroundImage, video } = treino;
+    const query = 'INSERT INTO treinos (title, content, category, backgroundImage,nome, video,user) VALUES (?,?,?, ?, ?, ?, ?)';
 
-    db.query(query, [title, content, category, backgroundImage, id], (err, results) => {
+    db.query(query, [title, content, category, backgroundImage, nome, video, id], (err, results) => {
       if (err) {
         console.error('Erro ao inserir treino:', err);
       }
@@ -370,7 +370,7 @@ app.get('/obter-treinos/:userId', (req, res) => {
   }
 
   // Consulta SQL para selecionar os treinos de um usuário específico
-  const query = 'SELECT title, content, category, backgroundImage,video FROM treinos WHERE user = ?';
+  const query = 'SELECT title, content, category, backgroundImage,video,nome FROM treinos WHERE user = ?';
 
   db.query(query, [userId], (err, results) => {
     if (err) {
